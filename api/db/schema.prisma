@@ -8,11 +8,68 @@ generator client {
   binaryTargets = "native"
 }
 
-// Define your own datamodels here and run `yarn redwood prisma migrate dev`
-// to create migrations for them and apply to your dev DB.
-// TODO: Please remove the following example:
-model UserExample {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+model MealType {
+  id Int @id @default(autoincrement())
+    name String
+    meals Meal[]
 }
+
+model Meal {
+  id Int @id @default(autoincrement())
+  mealType MealType @relation(fields: [mealTypeId], references: [id])
+  mealTypeId Int
+  date DateTime
+  description String
+  recipe Recipe @relation(fields: [recipeId], references: [id])
+  recipeId Int
+}
+
+model Recipe {
+  id Int @id @default(autoincrement())
+  name String
+  prep_time Int
+  cook_time Int
+  servings Int
+  intro String
+  description String
+  rating Int @default(0)
+  tags String
+  recipeIngredients RecipeIngredient[]
+  meals Meal[]
+}
+
+model RecipeIngredient {
+  id Int @id @default(autoincrement())
+  recipe Recipe @relation(fields: [recipeId], references: [id])
+  recipeId Int
+  ingredient Ingredient @relation(fields: [ingredientId], references: [id])
+  ingredientId Int
+  amount Float
+}
+
+model Ingredient {
+  id Int @id @default(autoincrement())
+  recipeIngredients RecipeIngredient[]
+  pantryItem Boolean
+  name String
+  unit String
+  shoppingListItems ShoppingListItem[]
+}
+
+model ShoppingListItem {
+  id Int @id @default(autoincrement())
+  shoppingList ShoppingList @relation(fields: [shoppingListId], references: [id])
+  shoppingListId Int
+  ingredient Ingredient @relation(fields: [ingredientId], references: [id])
+  ingredientId Int
+  amount Float
+}
+
+model ShoppingList {
+  id Int @id @default(autoincrement())
+  startDate DateTime
+  endDate DateTime
+  numberOfPeople Int
+  shoppingListItems ShoppingListItem[]
+}
+
