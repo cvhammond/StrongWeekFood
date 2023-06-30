@@ -9,8 +9,12 @@ import {
   Submit,
 } from '@redwoodjs/forms'
 
+import MealTypeSelectCell from 'src/components/MealTypeSelectCell'
+
 import type { EditMealById, UpdateMealInput } from 'types/graphql'
 import type { RWGqlError } from '@redwoodjs/forms'
+import RecipeSelectCell from 'src/components/RecipeSelectCell'
+
 
 const formatDatetime = (value) => {
   if (value) {
@@ -42,7 +46,7 @@ const MealForm = (props: MealFormProps) => {
           listClassName="rw-form-error-list"
         />
 
-        <Label
+        {/*<Label
           name="mealTypeId"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
@@ -59,6 +63,9 @@ const MealForm = (props: MealFormProps) => {
         />
 
         <FieldError name="mealTypeId" className="rw-field-error" />
+        */}
+
+        <MealTypeSelectCell />
 
         <Label
           name="date"
@@ -96,7 +103,7 @@ const MealForm = (props: MealFormProps) => {
 
         <FieldError name="description" className="rw-field-error" />
 
-        <Label
+        {/*<Label
           name="recipeId"
           className="rw-label"
           errorClassName="rw-label rw-label-error"
@@ -113,6 +120,9 @@ const MealForm = (props: MealFormProps) => {
         />
 
         <FieldError name="recipeId" className="rw-field-error" />
+        */}
+
+        <RecipeSelectCell />
 
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">

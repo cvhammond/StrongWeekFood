@@ -12,6 +12,13 @@ export const QUERY = gql`
       recipeId
       ingredientId
       amount
+      ingredient {
+        name
+        unit
+      }
+      recipe {
+        name
+      }
     }
   }
 `

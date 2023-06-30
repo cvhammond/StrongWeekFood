@@ -75,7 +75,7 @@ const IngredientForm = (props: IngredientFormProps) => {
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          Unit
+          Unit (e.g. cup, tbsp, etc.)
         </Label>
 
         <TextField

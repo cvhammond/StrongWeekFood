@@ -51,10 +51,6 @@ const Recipe = ({ recipe }: Props) => {
         <table className="rw-table">
           <tbody>
             <tr>
-              <th>Id</th>
-              <td>{recipe.id}</td>
-            </tr>
-            <tr>
               <th>Name</th>
               <td>{recipe.name}</td>
             </tr>

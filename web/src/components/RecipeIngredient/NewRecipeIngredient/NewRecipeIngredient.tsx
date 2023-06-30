@@ -25,7 +25,7 @@ const NewRecipeIngredient = () => {
       onCompleted: () => {
         toast.success('RecipeIngredient created')
         navigate(
-        recipeId ? routes.recipe({id: recipeId}) : routes.recipeIngredients())
+          recipeId ? routes.recipe({ id: recipeId }) : routes.recipeIngredients())
       },
       onError: (error) => {
         toast.error(error.message)

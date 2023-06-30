@@ -46,14 +46,14 @@ const RecipeIngredientsList = ({
     }
   }
 
+  console.log(recipeIngredients)
+
   return (
     <div className="rw-segment rw-table-wrapper-responsive">
       <table className="rw-table">
         <thead>
           <tr>
-            <th>Id</th>
-            <th>Recipe id</th>
-            <th>Ingredient id</th>
+            <th>Ingredient</th>
             <th>Amount</th>
             <th>&nbsp;</th>
           </tr>
@@ -61,21 +61,12 @@ const RecipeIngredientsList = ({
         <tbody>
           {recipeIngredients.map((recipeIngredient) => (
             <tr key={recipeIngredient.id}>
-              <td>{truncate(recipeIngredient.id)}</td>
-              <td>{truncate(recipeIngredient.recipeId)}</td>
-              <td>{truncate(recipeIngredient.ingredientId)}</td>
-              <td>{truncate(recipeIngredient.amount)}</td>
+              <td>{truncate(recipeIngredient?.ingredient.name)}</td>
+              <td>
+              {recipeIngredient.amount} {recipeIngredient?.ingredient.unit}(s)
+              </td>
               <td>
                 <nav className="rw-table-actions">
-                  <Link
-                    to={routes.recipeIngredient({ id: recipeIngredient.id })}
-                    title={
-                      'Show recipeIngredient ' + recipeIngredient.id + ' detail'
-                    }
-                    className="rw-button rw-button-small"
-                  >
-                    Show
-                  </Link>
                   <Link
                     to={routes.editRecipeIngredient({
                       id: recipeIngredient.id,
