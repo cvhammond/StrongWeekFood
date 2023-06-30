@@ -55,26 +55,6 @@ const RecipeIngredientForm = (props: RecipeIngredientFormProps) => {
           listClassName="rw-form-error-list"
         />
 
-        {/*
-        <Label
-          name="recipeId"
-          className="rw-label"
-          errorClassName="rw-label rw-label-error"
-        >
-          Recipe id
-        </Label>
-
-        <NumberField
-          name="recipeId"
-          defaultValue={props.recipeIngredient?.recipeId}
-          className="rw-input"
-          errorClassName="rw-input rw-input-error"
-          validation={{ required: true }}
-        />
-
-        <FieldError name="recipeId" className="rw-field-error" />
-        */}
-
         <RecipeSelectCell />
 
         {/*
