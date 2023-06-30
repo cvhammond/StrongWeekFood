@@ -10,6 +10,14 @@ export const QUERY = gql`
     mealsByDate(date: $date) {
       id
       mealTypeId
+      mealType {
+        name
+      }
+      recipe {
+        id
+        name
+        description
+      }
       date
       description
       recipeId
@@ -34,6 +42,6 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div className="rw-cell-error">{error?.message}</div>
 )
 
-export const Success = ({ meals }: CellSuccessProps<FindMeals>) => {
-  return <Meals meals={meals} />
+export const Success = ({mealsByDate}) => {
+  return <Meals meals={mealsByDate} />
 }

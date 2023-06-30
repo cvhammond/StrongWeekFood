@@ -36,31 +36,29 @@ const MealsList = ({ meals }: FindMeals) => {
     }
   }
 
+  console.log(meals)
+
   return (
     <div className="rw-segment rw-table-wrapper-responsive">
       <table className="rw-table">
         <thead>
           <tr>
-            <th>Id</th>
-            <th>Meal type id</th>
-            <th>Date</th>
+            <th>Meal Type</th>
             <th>Description</th>
-            <th>Recipe id</th>
+            <th>Recipe</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
         <tbody>
-          {meals.map((meal) => (
+          {meals && meals.map((meal) => (
             <tr key={meal.id}>
-              <td>{truncate(meal.id)}</td>
-              <td>{truncate(meal.mealTypeId)}</td>
-              <td>{timeTag(meal.date)}</td>
+              <td>{truncate(meal.mealType?.name)}</td>
               <td>{truncate(meal.description)}</td>
-              <td>{truncate(meal.recipeId)}</td>
+              <td>{truncate(meal.recipe?.name)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link
-                    to={routes.meal({ id: meal.id })}
+                    to={routes.recipe({ id: meal.recipe?.id })}
                     title={'Show meal ' + meal.id + ' detail'}
                     className="rw-button rw-button-small"
                   >

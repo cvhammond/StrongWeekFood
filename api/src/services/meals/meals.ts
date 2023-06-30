@@ -16,9 +16,24 @@ export const meal: QueryResolvers['meal'] = ({ id }) => {
   })
 }
 
+const dateRange = (date: Date) => {
+  const start = new Date(date)
+  start.setHours(0, 0, 0, 0)
+  const end = new Date(date)
+  end.setHours(23, 59, 59, 999)
+  return { start, end }
+}
+
 export const mealsByDate: QueryResolvers['mealsByDate'] = ({ date }) => {
+  let asDate = new Date(date)
+  const { start, end } = dateRange(asDate)
   return db.meal.findMany({
-    where: { date },
+    where: {
+      date: {
+        gte: start,
+        lte: end,
+      },
+    },
   })
 }
 
