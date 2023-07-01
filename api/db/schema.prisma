@@ -63,6 +63,7 @@ model ShoppingListItem {
   ingredient Ingredient @relation(fields: [ingredientId], references: [id])
   ingredientId Int
   amount Float
+  complete Boolean @default(false)
 }
 
 model ShoppingList {

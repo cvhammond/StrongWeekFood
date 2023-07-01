@@ -10,9 +10,9 @@ import type {
   FindShoppingListItems,
 } from 'types/graphql'
 
-const DELETE_SHOPPING_LIST_ITEM_MUTATION = gql`
-  mutation DeleteShoppingListItemMutation($id: Int!) {
-    deleteShoppingListItem(id: $id) {
+const UPDATE_SHOPPING_LIST_ITEM_MUTATION = gql`
+  mutation UpdateShoppingListItemMutation($id: Int!, $input: UpdateShoppingListItemInput!) {
+    updateShoppingListItem(id: $id, input: $input) {
       id
     }
   }
@@ -21,11 +21,11 @@ const DELETE_SHOPPING_LIST_ITEM_MUTATION = gql`
 const ShoppingListItemsList = ({
   shoppingListItems,
 }: FindShoppingListItems) => {
-  const [deleteShoppingListItem] = useMutation(
-    DELETE_SHOPPING_LIST_ITEM_MUTATION,
+  const [updateShoppingListItem] = useMutation(
+    UPDATE_SHOPPING_LIST_ITEM_MUTATION,
     {
       onCompleted: () => {
-        toast.success('ShoppingListItem deleted')
+        toast.success('ShoppingListItem updated')
       },
       onError: (error) => {
         toast.error(error.message)
@@ -38,12 +38,9 @@ const ShoppingListItemsList = ({
     }
   )
 
-  const onDeleteClick = (id: DeleteShoppingListItemMutationVariables['id']) => {
-    if (
-      confirm('Are you sure you want to delete shoppingListItem ' + id + '?')
-    ) {
-      deleteShoppingListItem({ variables: { id } })
-    }
+  const onCompleteClick = (id: DeleteShoppingListItemMutationVariables['id'], complete) => {
+    const input = { complete: !complete }
+    updateShoppingListItem({ variables: { id, input} })
   }
 
   return (
@@ -51,23 +48,42 @@ const ShoppingListItemsList = ({
       <table className="rw-table">
         <thead>
           <tr>
-            <th>Id</th>
-            <th>Shopping list id</th>
-            <th>Ingredient id</th>
+            <th>Ingredient</th>
             <th>Amount</th>
+            <th>Pantry item</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
         <tbody>
           {shoppingListItems.map((shoppingListItem) => (
             <tr key={shoppingListItem.id}>
-              <td>{truncate(shoppingListItem.id)}</td>
-              <td>{truncate(shoppingListItem.shoppingListId)}</td>
-              <td>{truncate(shoppingListItem.ingredientId)}</td>
-              <td>{truncate(shoppingListItem.amount)}</td>
+              <td>{truncate(shoppingListItem.ingredient?.name)}</td>
+              <td>{shoppingListItem.amount} {shoppingListItem.ingredient?.unit}(s)</td>
+              <td>{shoppingListItem.ingredient?.pantryItem ? 'Yes' : 'No'}</td>
               <td>
-                <nav className="rw-table-actions">
-                  <Link
+                {shoppingListItem.complete ?
+                  <button
+                    type="button"
+                    title={'Mark Complete'}
+                    className={"rw-button rw-button-small rw-button-green"}
+                    onClick={() => onCompleteClick(shoppingListItem.id, shoppingListItem.complete)}
+                  >
+                    Complete
+                  </button>
+                  :
+                  <button
+                    type="button"
+                    title={'Mark Incomplete'}
+                    className={"rw-button rw-button-small rw-button-blue"}
+                    onClick={() => onCompleteClick(shoppingListItem.id, shoppingListItem.complete)}
+                  >
+                    Got it!
+                  </button>
+                }
+
+                {/*
+                     <nav className="rw-table-actions">
+                 <Link
                     to={routes.shoppingListItem({ id: shoppingListItem.id })}
                     title={
                       'Show shoppingListItem ' + shoppingListItem.id + ' detail'
@@ -93,7 +109,8 @@ const ShoppingListItemsList = ({
                   >
                     Delete
                   </button>
-                </nav>
+                  </nav>
+                  */}
               </td>
             </tr>
           ))}

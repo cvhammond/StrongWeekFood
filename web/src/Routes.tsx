@@ -20,6 +20,7 @@ const Routes = () => {
         <Route path="/shopping-lists/{id:Int}/edit" page={ShoppingListEditShoppingListPage} name="editShoppingList" />
         <Route path="/shopping-lists/{id:Int}" page={ShoppingListShoppingListPage} name="shoppingList" />
         <Route path="/shopping-lists" page={ShoppingListShoppingListsPage} name="shoppingLists" />
+        <Route path="/shopping-list" page={ShoppingListPage} name="weekShoppingList"/>
       </Set>
       <Set wrap={ScaffoldLayout} title="ShoppingListItems" titleTo="shoppingListItems" buttonLabel="New ShoppingListItem" buttonTo="newShoppingListItem">
         <Route path="/shopping-list-items/new" page={ShoppingListItemNewShoppingListItemPage} name="newShoppingListItem" />

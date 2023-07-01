@@ -179,6 +179,8 @@ const RecipeForm = (props: RecipeFormProps) => {
 
         <FieldError name="tags" className="rw-field-error" />
 
+        <Label name="test" className="rw-label">Ingredients can be added once a recipe is made</Label>
+
         <div className="rw-button-group">
           <Submit disabled={props.loading} className="rw-button rw-button-blue">
             Save

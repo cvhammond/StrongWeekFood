@@ -1,19 +1,24 @@
 import { DateField, Form, Label, Submit, FieldError } from '@redwoodjs/forms'
 import MealsCell from 'src/components/Meal/MealsCell'
 
-const MealsPage = () => {
-
+export const getSundaySpread = () => {
   let lastSunday = new Date()
   lastSunday.setDate(lastSunday.getDate() - lastSunday.getDay() + 1)
   let sevenDaysFromLastSunday = new Date(lastSunday)
-  sevenDaysFromLastSunday.setDate(sevenDaysFromLastSunday.getDate() + 6)
+sevenDaysFromLastSunday.setDate(sevenDaysFromLastSunday.getDate() + 6)
+return {lastSunday, sevenDaysFromLastSunday}
+}
+
+const MealsPage = () => {
+
+  const {lastSunday, sevenDaysFromLastSunday} = getSundaySpread()
+
   const [days, setDays] = React.useState(datesBetween(lastSunday.toDateString(), sevenDaysFromLastSunday.toDateString()))
 
   const onSubmit = (data: any) => {
     let startDate = new Date(data['start-date']).toDateString()
     let endDate = new Date(data['end-date']).toDateString()
     let dates = datesBetween(startDate, endDate)
-    console.log(dates)
     setDays(dates)
   }
 

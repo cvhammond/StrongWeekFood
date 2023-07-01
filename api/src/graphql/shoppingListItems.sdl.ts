@@ -6,6 +6,7 @@ export const schema = gql`
     ingredient: Ingredient!
     ingredientId: Int!
     amount: Float!
+    complete: Boolean
   }
 
   type Query {
@@ -23,6 +24,7 @@ export const schema = gql`
     shoppingListId: Int
     ingredientId: Int
     amount: Float
+    complete: Boolean
   }
 
   type Mutation {

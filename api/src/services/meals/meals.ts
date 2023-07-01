@@ -16,7 +16,7 @@ export const meal: QueryResolvers['meal'] = ({ id }) => {
   })
 }
 
-const dateRange = (date: Date) => {
+export const dateRange = (date: Date) => {
   const start = new Date(date)
   start.setHours(0, 0, 0, 0)
   const end = new Date(date)

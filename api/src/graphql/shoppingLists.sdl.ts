@@ -10,6 +10,7 @@ export const schema = gql`
   type Query {
     shoppingLists: [ShoppingList!]! @requireAuth
     shoppingList(id: Int!): ShoppingList @requireAuth
+    shoppingListByDate(startDate: DateTime!, endDate: DateTime!, numberOfPeople: Int!): ShoppingList @requireAuth
   }
 
   input CreateShoppingListInput {
