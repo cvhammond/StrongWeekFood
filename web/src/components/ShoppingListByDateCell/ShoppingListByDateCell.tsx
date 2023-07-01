@@ -44,7 +44,6 @@ export const Success = ({
 }) => {
   return (
     <>
-      <div>{JSON.stringify(shoppingListByDate)}</div>
       <InteractiveShoppingList shoppingList={shoppingListByDate} />
     </>
   )

@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
@@ -21,6 +22,13 @@ const UPDATE_SHOPPING_LIST_ITEM_MUTATION = gql`
 const ShoppingListItemsList = ({
   shoppingListItems,
 }: FindShoppingListItems) => {
+
+  const [localShoppingListItems, setLocalShoppingListItems] = useState(shoppingListItems)
+
+  useEffect(() => {
+    setLocalShoppingListItems(shoppingListItems)
+  }, [shoppingListItems])
+
   const [updateShoppingListItem] = useMutation(
     UPDATE_SHOPPING_LIST_ITEM_MUTATION,
     {
@@ -40,7 +48,15 @@ const ShoppingListItemsList = ({
 
   const onCompleteClick = (id: DeleteShoppingListItemMutationVariables['id'], complete) => {
     const input = { complete: !complete }
-    updateShoppingListItem({ variables: { id, input} })
+    //updateShoppingListItem({ variables: { id, input} })
+    let newLocalShoppingListItems = localShoppingListItems.map((shoppingListItem) => {
+      if (shoppingListItem.id === id) {
+        return { ...shoppingListItem, complete: !complete }
+      } else {
+        return shoppingListItem
+      }
+    })
+    setLocalShoppingListItems(newLocalShoppingListItems)
   }
 
   return (
@@ -55,7 +71,7 @@ const ShoppingListItemsList = ({
           </tr>
         </thead>
         <tbody>
-          {shoppingListItems.map((shoppingListItem) => (
+          {localShoppingListItems.map((shoppingListItem) => (
             <tr key={shoppingListItem.id}>
               <td>{truncate(shoppingListItem.ingredient?.name)}</td>
               <td>{shoppingListItem.amount} {shoppingListItem.ingredient?.unit}(s)</td>

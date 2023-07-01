@@ -20,7 +20,6 @@ const Routes = () => {
         <Route path="/shopping-lists/{id:Int}/edit" page={ShoppingListEditShoppingListPage} name="editShoppingList" />
         <Route path="/shopping-lists/{id:Int}" page={ShoppingListShoppingListPage} name="shoppingList" />
         <Route path="/shopping-lists" page={ShoppingListShoppingListsPage} name="shoppingLists" />
-        <Route path="/shopping-list" page={ShoppingListPage} name="weekShoppingList"/>
       </Set>
       <Set wrap={ScaffoldLayout} title="ShoppingListItems" titleTo="shoppingListItems" buttonLabel="New ShoppingListItem" buttonTo="newShoppingListItem">
         <Route path="/shopping-list-items/new" page={ShoppingListItemNewShoppingListItemPage} name="newShoppingListItem" />
@@ -57,6 +56,9 @@ const Routes = () => {
         <Route path="/meal-types/{id:Int}/edit" page={MealTypeEditMealTypePage} name="editMealType" />
         <Route path="/meal-types/{id:Int}" page={MealTypeMealTypePage} name="mealType" />
         <Route path="/meal-types" page={MealTypeMealTypesPage} name="mealTypes" />
+      </Set>
+      <Set wrap={ScaffoldLayout} title="" titleTo="" buttonLabel="" buttonTo="">
+        <Route path="/shopping-list" page={ShoppingListPage} name="weekShoppingList" />
       </Set>
       <Route notfound page={NotFoundPage} />
     </Router>

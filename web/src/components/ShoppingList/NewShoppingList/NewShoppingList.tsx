@@ -6,7 +6,7 @@ import ShoppingListForm from 'src/components/ShoppingList/ShoppingListForm'
 
 import type { CreateShoppingListInput } from 'types/graphql'
 
-const CREATE_SHOPPING_LIST_MUTATION = gql`
+export const CREATE_SHOPPING_LIST_MUTATION = gql`
   mutation CreateShoppingListMutation($input: CreateShoppingListInput!) {
     createShoppingList(input: $input) {
       id
